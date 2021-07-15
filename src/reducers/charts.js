@@ -6,11 +6,15 @@ export const charts = createSlice({
   name: "charts",
   initialState: {
     chartArray: [],
+    duplicated: false,
   },
   reducers: {
     setCharts: (store, action) => {
       store.chartArray = action.payload;
     },
+    setDuplication: (store, action) => {
+      store.duplicated = action.payload;
+    }
   },
 });
 
