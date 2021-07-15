@@ -1,11 +1,10 @@
 import React from "react";
+import { Donut } from "./Donut";
 
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
-// import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
@@ -13,12 +12,12 @@ import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
-// APEXXHARTS
-// import ApexCharts from "apexcharts";
+// Styled Components
+import styled from "styled-components/macro";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    maxWidth: 800,
   },
   media: {
     height: 0,
@@ -29,24 +28,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const CardContainer = styled(Card)`
+  border: 1px solid red;
+  margin: 20px;
+  // width: 50vw;
+`;
 export const ChartWidget = ({
   data
 }) => {
   console.log(data);
-  // const chartsArray = useSelector((store) => store.charts.chartArray);
-
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(getCharts());
-  // }, [dispatch]);
 
   // Material UI
   const classes = useStyles();
 
   return (
-    <>
-      <Card className={classes.root}>
+      <CardContainer className={classes.root}>
         <CardHeader
           action={
             <IconButton aria-label="settings">
@@ -54,18 +50,12 @@ export const ChartWidget = ({
             </IconButton>
           }
         />
-        <CardMedia
-          className={classes.media}
-          image="/static/images/cards/paella.jpg"
-          title="Paella dish"
-        />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            Helloo
+            <Donut data={data}/>
           </Typography>
         </CardContent>
         <CardActions disableSpacing></CardActions>
-      </Card>
-    </>
+      </CardContainer>
   );
 };
