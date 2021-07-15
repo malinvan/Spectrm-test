@@ -17,22 +17,23 @@ import styled from "styled-components/macro";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 800,
+    maxWidth: 1000,
   },
   media: {
     height: 0,
     paddingTop: "56.25%", // 16:9
   },
-  avatar: {
-    backgroundColor: red[500],
-  },
 }));
 
 const CardContainer = styled(Card)`
-  border: 1px solid red;
   margin: 20px;
-  // width: 50vw;
+  width: 100vw;
 `;
+
+const onClickBtn = () => {
+
+}
+
 export const ChartWidget = ({
   data
 }) => {
@@ -46,7 +47,7 @@ export const ChartWidget = ({
         <CardHeader
           action={
             <IconButton aria-label="settings">
-              <MoreVertIcon />
+              <MoreVertIcon onClick={onClickBtn} />
             </IconButton>
           }
         />

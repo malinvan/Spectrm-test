@@ -15,7 +15,7 @@ export const Donut = ({
     title: {
       text: data.title,
       align: 'left',
-      margin: 20,
+      margin: 30,
       style: {
         fontSize: '22px',
         fontWeight: 'bold'
@@ -46,10 +46,11 @@ export const Donut = ({
       }
     },
     legend: {
-      fontSize: '16px',
+      fontSize: '20px',
       fontWeight: 600,
-      offsetY: 50,
-      offsetX: -20,
+      offsetY: 60,
+      offsetX: -60,
+      width: 250,
       markers: {
         width: 16,
         height: 16,
@@ -64,7 +65,7 @@ export const Donut = ({
       breakpoint: 480,
       options: {
         chart: {
-          width: 200
+          width: 600
         },
         legend: {
           position: 'bottom'
@@ -82,7 +83,7 @@ export const Donut = ({
         options={options} 
         series={series}
         type="donut"
-        width={500}
+        width={600}
         height={800}
       />
     </div>
