@@ -28,7 +28,7 @@ export const Dashboard = () => {
     <Container>
       {chartsArray &&
         chartsArray.map((chart) => {
-          return <ChartWidget data={chart} key={chart.title} />;
+          return <ChartWidget data={chart} key={chart.id} />;
         })}
     </Container>
   );

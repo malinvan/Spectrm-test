@@ -1,8 +1,9 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
-// Internatl files
+// Internal files
 import { Donut } from "./Donut";
+import { charts } from '../reducers/charts';
 
 // Material UI - Card
 import { makeStyles } from "@material-ui/core/styles";
@@ -39,7 +40,6 @@ const CardContainer = styled(Card)`
 `;
 
 export const ChartWidget = ({ data }) => {
-  const duplicated = useSelector((store) => store.charts.duplicated);
 
   // Material UI
   const classes = useStyles();
@@ -50,16 +50,27 @@ export const ChartWidget = ({ data }) => {
     console.log("Hello");
   };
 
+  // Close menu after clicking
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  // Duplicate after clicking
+  const dispatch = useDispatch()
+
+  const handleDuplication = () => {
+    dispatch(charts.actions.duplicate(data.id))
+    console.log(data.id);
+  }
+
+
 
   return (
     <CardContainer className={classes.root}>
       <CardHeader
         action={
           <>
-            {!duplicated &&
+            {!data.duplicated &&
             <>
               <IconButton
               aria-controls="simple-menu"
@@ -76,7 +87,12 @@ export const ChartWidget = ({ data }) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Dublicate</MenuItem>
+                <MenuItem 
+                  onClick={() => {
+                    handleClose()
+                    handleDuplication()
+                  }
+                }>Dublicate</MenuItem>
               </Menu>
             </>
             }
