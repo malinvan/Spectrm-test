@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const API_URL = "https://gitlab.com/-/snippets/2149167/raw/main/data.json";
+const API_URL = "https://api.jsonbin.io/b/60efe797c1256a01cb6f94d9";
 
 export const charts = createSlice({
   name: "charts",
@@ -10,17 +10,17 @@ export const charts = createSlice({
   reducers: {
     setCharts: (store, action) => {
       store.chartArray = action.payload;
-  }
+    },
   },
 });
 
 export const getCharts = () => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     fetch(API_URL)
       .then((res) => res.json())
       .then((chart) => {
-        dispatch(charts.action.setCharts(chart))
+        dispatch(charts.actions.setCharts(chart.profiles));
         console.log(chart);
-      })
-  }
-}
+      });
+  };
+};
