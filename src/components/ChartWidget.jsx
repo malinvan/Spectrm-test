@@ -1,9 +1,4 @@
-// React-Redux
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-
-// Internal files
-import { getCharts } from "../reducers/charts";
+import React from "react";
 
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
@@ -13,13 +8,13 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+
+// APEXXHARTS
+// import ApexCharts from "apexcharts";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,60 +29,43 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const ChartWidget = () => {
-  const chartsArray = useSelector((store) => store.charts.chartArray);
+export const ChartWidget = ({
+  data
+}) => {
+  console.log(data);
+  // const chartsArray = useSelector((store) => store.charts.chartArray);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getCharts());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getCharts());
+  // }, [dispatch]);
 
   // Material UI
   const classes = useStyles();
 
   return (
     <>
-      {chartsArray &&
-        chartsArray.map((chart) => {
-          return (
-            <>
-              <Card className={classes.root}>
-                <CardHeader
-                  action={
-                    <IconButton aria-label="settings">
-                      <MoreVertIcon />
-                    </IconButton>
-                  }
-                />
-                <CardMedia
-                  className={classes.media}
-                  image="/static/images/cards/paella.jpg"
-                  title="Paella dish"
-                />
-                <CardContent>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    This impressive paella is a perfect party dish and a fun
-                    meal to cook together with your guests. Add 1 cup of frozen
-                    peas along with the mussels, if you like.
-                  </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                  <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                  </IconButton>
-                  <IconButton aria-label="share">
-                    <ShareIcon />
-                  </IconButton>
-                </CardActions>
-              </Card>
-            </>
-          );
-        })}
+      <Card className={classes.root}>
+        <CardHeader
+          action={
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          }
+        />
+        <CardMedia
+          className={classes.media}
+          image="/static/images/cards/paella.jpg"
+          title="Paella dish"
+        />
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Helloo
+          </Typography>
+        </CardContent>
+        <CardActions disableSpacing></CardActions>
+      </Card>
     </>
   );
 };
