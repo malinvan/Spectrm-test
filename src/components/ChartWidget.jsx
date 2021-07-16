@@ -21,7 +21,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
 // Styled Components
-import styled from "styled-components/macro";
+import styled from "styled-components";
 
 // Styles for Material UI
 const useStyles = makeStyles((theme) => ({

@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // Styled Components
-import styled from "styled-components/macro";
+import styled from "styled-components";
 
 // Internal files
 import { getCharts } from "../reducers/charts";
