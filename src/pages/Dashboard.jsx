@@ -9,6 +9,7 @@ import styled from "styled-components/macro";
 import { getCharts } from "../reducers/charts";
 import { ChartWidget } from "../components/ChartWidget";
 
+// Flexboxing
 const Container = styled.section`
   display: flex;
   flex-direction: column;
@@ -20,10 +21,12 @@ export const Dashboard = () => {
 
   const dispatch = useDispatch();
 
+  // useEffect for dispatching the thunk with the fetch
   useEffect(() => {
     dispatch(getCharts());
   }, [dispatch]);
 
+  // Map over the array containing the charts to render each chart and sending the props of each chart
   return (
     <Container>
       {chartsArray &&

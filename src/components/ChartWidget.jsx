@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 
 // Internal files
 import { Donut } from "./Donut";
-import { charts } from '../reducers/charts';
+import { charts } from "../reducers/charts";
 
 // Material UI - Card
 import { makeStyles } from "@material-ui/core/styles";
@@ -14,6 +14,7 @@ import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 // Material UI - Menu
 import Menu from "@material-ui/core/Menu";
@@ -25,7 +26,8 @@ import styled from "styled-components/macro";
 // Styles for Material UI
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 1000,
+    maxWidth: 650,
+    textDecoration: "underline dotted black",
   },
   media: {
     height: 0,
@@ -33,72 +35,81 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// Styling for Container
+// To change the predefined font weight of Material UI
+const THEME = createMuiTheme({
+  typography: {
+    h5: {
+      fontWeight: 900,
+    },
+  },
+});
+
+// Adding margin between widgets
 const CardContainer = styled(Card)`
-  margin: 20px;
-  width: 100vw;
+  margin: 20px 0;
 `;
 
+// Sending the data as props to the Donut
 export const ChartWidget = ({ data }) => {
-
   // Material UI
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-    console.log("Hello");
   };
 
-  // Close menu after clicking
   const handleClose = () => {
     setAnchorEl(null);
   };
 
   // Duplicate after clicking
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleDuplication = () => {
-    dispatch(charts.actions.duplicate(data.id))
-    console.log(data.id);
-  }
-
-
+    dispatch(charts.actions.duplicate(data.id));
+  };
 
   return (
     <CardContainer className={classes.root}>
-      <CardHeader
-        action={
-          <>
-            {!data.duplicated &&
+      <MuiThemeProvider theme={THEME}>
+        <CardHeader
+          className="card-title"
+          action={
             <>
-              <IconButton
-              aria-controls="simple-menu"
-              aria-haspopup="true"
-              aria-label="settings"
-              onClick={handleClick}
-            >
-                <MoreVertIcon />
-              </IconButton>
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem 
-                  onClick={() => {
-                    handleClose()
-                    handleDuplication()
-                  }
-                }>Dublicate</MenuItem>
-              </Menu>
+              {!data.duplicated && (
+                <>
+                  <IconButton
+                    aria-controls="simple-menu"
+                    aria-haspopup="true"
+                    aria-label="settings"
+                    onClick={handleClick}
+                  >
+                    <MoreVertIcon />
+                  </IconButton>
+                  <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                  >
+                    <MenuItem
+                      onClick={() => {
+                        handleClose();
+                        handleDuplication();
+                      }}
+                    >
+                      Dublicate
+                    </MenuItem>
+                  </Menu>
+                </>
+              )}
             </>
-            }
-          </>
-        }
-      />
+          }
+          title={data.title}
+        />
+      </MuiThemeProvider>
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           <Donut data={data} />

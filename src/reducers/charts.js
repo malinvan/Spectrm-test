@@ -1,4 +1,4 @@
-import { createSlice, current, original } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 // Library for cloning
 import clone from "just-clone";
@@ -11,29 +11,33 @@ export const charts = createSlice({
     chartArray: [],
   },
   reducers: {
+    // To set the chartsArray to the charts of the JSON
     setCharts: (store, action) => {
       store.chartArray = action.payload;
     },
+    // To duplicate a chart:
+    // first find by id and compare it to the payload
+    // set duplicated to true
+    // using the library Just-Clone to clone the chart
+    // adding the duplicated chart to the chartArray by spreading it and then adding it
     duplicate: (store, action) => {
       const chart = store.chartArray.find(
         (chart) => chart.id === action.payload
       );
       chart.duplicated = true;
-      console.log(action.payload, chart);
-      console.log(current(store, chart));
       const duplication = clone(chart);
       store.chartArray = [...store.chartArray, duplication];
     },
   },
 });
 
+// Thunk for fetching the API and setting the charts to the Redux state
 export const getCharts = () => {
   return (dispatch) => {
     fetch(API_URL)
       .then((res) => res.json())
       .then((chart) => {
         dispatch(charts.actions.setCharts(chart.profiles));
-        console.log(chart);
       });
   };
 };

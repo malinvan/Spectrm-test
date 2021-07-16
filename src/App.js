@@ -1,17 +1,17 @@
 // React-Redux
 import React from "react";
-import { Provider } from 'react-redux';
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { Provider } from "react-redux";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 // Internal files
-import { charts } from './reducers/charts';
-import { Dashboard } from './pages/Dashboard';
+import { charts } from "./reducers/charts";
+import { Dashboard } from "./pages/Dashboard";
 
 const reducer = combineReducers({
-  charts: charts.reducer
-})
+  charts: charts.reducer,
+});
 
-const store = configureStore({ reducer })
+const store = configureStore({ reducer });
 
 function App() {
   return (

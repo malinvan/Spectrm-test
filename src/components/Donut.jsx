@@ -1,28 +1,21 @@
-import React from 'react'
+import React from "react";
 
 // APEXCHARTS
-import ReactApexCharts from 'react-apexcharts';
+import ReactApexCharts from "react-apexcharts";
 
-export const Donut = ({
-  data
-}) => {
+export const Donut = ({ data }) => {
+  // Retrieving and iterating over the chart information to be able to interpolate it into each individual Donut
   const series = data.data.map((item) => item.value);
   const labels = data.data.map((item) => item.label);
   const totalLabel = data.totalLabel.toUpperCase();
+
+  // Using the JS reducer function to summarize the values
   const totalValue = series.reduce((acc, value) => acc + value);
 
+  // Donut
   const options = {
-    title: {
-      text: data.title,
-      align: 'left',
-      margin: 30,
-      style: {
-        fontSize: '22px',
-        fontWeight: 'bold'
-      }
-    },
     chart: {
-      type: 'donut',
+      type: "donut",
     },
     dataLabels: {
       enabled: false,
@@ -35,52 +28,54 @@ export const Donut = ({
             total: {
               show: true,
               showAlways: true,
-              fontWeight: 'bold',
-              fontSize: '40px',
+              fontWeight: "bold",
+              fontSize: "35px",
               size: 200,
               label: totalValue,
-              formatter: (w) => totalLabel
+              formatter: (w) => totalLabel,
             },
-          }
-        }
-      }
+          },
+        },
+      },
     },
     legend: {
-      fontSize: '20px',
+      fontSize: "16px",
       fontWeight: 600,
-      offsetY: 60,
-      offsetX: -60,
+      offsetY: 0,
+      offsetX: -30,
       width: 250,
       markers: {
         width: 16,
         height: 16,
-        offsetX: -10
+        offsetX: -10,
+        colors: ["#c4366f", "#85adff", "#502579"],
       },
       itemMargin: {
-        vertical: 13
+        vertical: 10,
       },
     },
     labels,
-    responsive: [{
-      breakpoint: 480,
-      options: {
-        chart: {
-          width: 600
+    responsive: [
+      {
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 600,
+          },
+          legend: {
+            position: "bottom",
+          },
         },
-        legend: {
-          position: 'bottom'
-        }
-      }
-    }],
-    theme: {
-      palette: 'palette3'
-    }
+      },
+    ],
+    // Changing the global colours to the colours of the template
+    colors: ["#c4366f", "#85adff", "#502579"],
   };
 
   return (
     <div id="chart">
       <ReactApexCharts
-        options={options} 
+        options={options}
         series={series}
         type="donut"
         width={600}
