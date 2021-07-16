@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0d03570a-dd24-4456-95aa-049f0b5806cf/deploy-status)](https://app.netlify.com/sites/malins-spectrm-test/deploys)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
